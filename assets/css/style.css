@@ -115,6 +115,19 @@ main.wrap { padding-top: 32px; padding-bottom: 64px; }
 .photo figcaption { font-size: .9rem; color: var(--muted); }
 .recipe-body blockquote { margin: 16px 0; padding: 10px 16px; border-left: 4px solid var(--accent); background: var(--surface); border-radius: 0 10px 10px 0; }
 
+/* Introduction on the home page */
+.byline { font-size: 1.15rem; color: var(--muted); margin: 0 0 20px; }
+.intro {
+  max-width: 720px; margin: 0 0 40px; padding: 24px 28px;
+  background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+}
+.intro h2 { font-size: 1.5rem; margin: 1.2em 0 .4em; }
+.intro h2:first-child { margin-top: 0; }
+.intro p { margin: 0 0 1em; }
+.signature { font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 1.15rem; color: var(--accent); margin-bottom: 0 !important; }
+.grid-heading { font-size: 1.6rem; margin: 0 0 16px; }
+
 /* Footer */
 .site-footer { border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; }
 .site-footer .wrap { padding-top: 20px; padding-bottom: 20px; }

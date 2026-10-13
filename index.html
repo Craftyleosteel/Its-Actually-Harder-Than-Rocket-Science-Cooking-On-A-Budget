@@ -6,7 +6,7 @@ layout: default
 
 <section class="home-hero">
   <h1>{{ site.title }}</h1>
-  <p class="lede">{{ site.subtitle }}. {{ site.description }}</p>
+  <p class="byline">{{ site.subtitle }} · by {{ site.author }}</p>
 
   <label class="search">
     <span class="visually-hidden">Search recipes</span>
@@ -25,6 +25,13 @@ layout: default
   </ul>
 </section>
 
+{% capture intro %}{% include introduction.md %}{% endcapture %}
+<article class="intro">
+  {{ intro | markdownify }}
+  <p class="signature">— {{ site.author }}</p>
+</article>
+
+<h2 class="grid-heading">The Recipes</h2>
 <div class="section-grid">
   {% for s in sections %}
     {% assign folder = "_recipes/" | append: s.slug | append: "/" %}

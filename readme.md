@@ -19,6 +19,7 @@ _recipes/               one folder per section, one file per recipe
     breakfast-burritos.jpg      <- photos go right next to the recipe
   mains/
     chicken-adobo.md
+_includes/introduction.md   the introduction on the home page
 templates/              copy these when adding something new
   recipe-template.md      blank recipe
   recipe-example.md       a filled-in example to compare against
@@ -28,6 +29,15 @@ scripts/                helper tools (see below)
 
 The folder name inside `_recipes/` must match a file name in `_sections/`.
 For example, `_recipes/mains/` goes with `_sections/mains.md`.
+
+---
+
+## Edit the introduction
+
+The home page introduction lives in **`_includes/introduction.md`**. Write it like any recipe file
+(blank line between paragraphs, `## ` for headings). Your name is signed at the end automatically.
+
+Your name, the title and the subtitle are set in `_config.yml` (`author: "Paco Navarro"`).
 
 ---
 
