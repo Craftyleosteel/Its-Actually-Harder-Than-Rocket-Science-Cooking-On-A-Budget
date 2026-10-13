@@ -1,0 +1,4 @@
+<figure class="photo">
+  <img src="{{ include.file }}" alt="{{ include.caption | default: '' | escape }}" loading="lazy">
+  {% if include.caption %}<figcaption>{{ include.caption }}</figcaption>{% endif %}
+</figure>

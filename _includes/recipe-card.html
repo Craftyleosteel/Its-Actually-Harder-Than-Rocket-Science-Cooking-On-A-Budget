@@ -1,0 +1,18 @@
+{% assign r = include.recipe %}
+{% assign rparts = r.relative_path | split: "/" %}
+<a class="card{% if r.coming_soon %} is-soon{% endif %}" href="{{ r.url | relative_url }}">
+  {% if r.image %}
+    {% assign img = "/recipes/" | append: rparts[1] | append: "/" | append: r.image %}
+    <img src="{{ img | relative_url }}" alt="" loading="lazy">
+  {% else %}
+    <div class="card-placeholder" aria-hidden="true">{{ include.emoji | default: "🍽️" }}</div>
+  {% endif %}
+  <div class="card-text">
+    <h3>{{ r.title }}</h3>
+    {% if r.coming_soon %}
+      <p class="badge">Coming soon</p>
+    {% elsif r.description %}
+      <p>{{ r.description }}</p>
+    {% endif %}
+  </div>
+</a>

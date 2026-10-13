@@ -1,0 +1,60 @@
+---
+layout: default
+---
+{% assign sections = site.sections | sort: "order" %}
+{% assign all_recipes = site.recipes | sort: "title" %}
+
+<section class="home-hero">
+  <h1>{{ site.title }}</h1>
+  <p class="lede">{{ site.subtitle }}. {{ site.description }}</p>
+
+  <label class="search">
+    <span class="visually-hidden">Search recipes</span>
+    <input id="search" type="search" placeholder="Search {{ all_recipes.size }} recipes…" autocomplete="off">
+  </label>
+  <ul id="results" class="results" hidden>
+    {% for r in all_recipes %}
+      {% assign rparts = r.relative_path | split: "/" %}
+      {% assign rs = sections | where: "slug", rparts[1] | first %}
+      <li data-search="{{ r.title | downcase | escape }} {% unless r.coming_soon %}{{ r.description | downcase | escape }}{% endunless %} {{ r.tags | join: ' ' | downcase | escape }} {{ rs.title | downcase }}">
+        <a href="{{ r.url | relative_url }}">{{ r.title }}</a>
+        <span class="muted">{{ rs.emoji }} {{ rs.title }}</span>
+      </li>
+    {% endfor %}
+    <li class="no-results muted" hidden>Nothing matches that yet.</li>
+  </ul>
+</section>
+
+<div class="section-grid">
+  {% for s in sections %}
+    {% assign folder = "_recipes/" | append: s.slug | append: "/" %}
+    {% assign n = 0 %}
+    {% for r in all_recipes %}{% if r.relative_path contains folder %}{% assign n = n | plus: 1 %}{% endif %}{% endfor %}
+    <a class="section-card" href="{{ s.url | relative_url }}">
+      <span class="emoji">{{ s.emoji }}</span>
+      <h2>{{ s.title }}</h2>
+      {% if s.description %}<p>{{ s.description }}</p>{% endif %}
+      <span class="count">{{ n }} recipe{% if n != 1 %}s{% endif %}</span>
+    </a>
+  {% endfor %}
+</div>
+
+<script>
+  (function () {
+    var input = document.getElementById("search");
+    var list = document.getElementById("results");
+    var items = list.querySelectorAll("li[data-search]");
+    var none = list.querySelector(".no-results");
+    input.addEventListener("input", function () {
+      var q = input.value.trim().toLowerCase();
+      list.hidden = q === "";
+      var shown = 0;
+      items.forEach(function (li) {
+        var match = q !== "" && li.getAttribute("data-search").indexOf(q) !== -1;
+        li.hidden = !match;
+        if (match) shown++;
+      });
+      none.hidden = shown > 0 || q === "";
+    });
+  })();
+</script>

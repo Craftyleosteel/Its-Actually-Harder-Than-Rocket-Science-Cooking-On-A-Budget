@@ -1,0 +1,38 @@
+# ------------------------------------------------------------------
+# Site settings. You rarely need to touch this file.
+# ------------------------------------------------------------------
+title: "It's Actually Harder Than Rocket Science"
+subtitle: "Cooking on a Budget"
+description: "A home cookbook of cheap, tasty, actually-doable recipes."
+
+# These two lines make links work on GitHub Pages.
+url: "https://craftyleosteel.github.io"
+baseurl: "/Its-Actually-Harder-Than-Rocket-Science-Cooking-On-A-Budget"
+
+markdown: kramdown
+
+# Each section of the cookbook (Breakfast, Mains, ...) is a file in _sections/
+# Each recipe is a file in _recipes/<section-folder>/
+collections:
+  sections:
+    output: true
+    permalink: /sections/:name/
+  recipes:
+    output: true
+    permalink: /recipes/:path
+
+defaults:
+  - scope: { path: "", type: sections }
+    values: { layout: section }
+  - scope: { path: "", type: recipes }
+    values: { layout: recipe }
+
+exclude:
+  - readme.md
+  - README.md
+  - templates
+  - scripts
+  - .vscode
+  - .github
+  - Gemfile
+  - Gemfile.lock

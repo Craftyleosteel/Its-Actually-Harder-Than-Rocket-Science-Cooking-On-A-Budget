@@ -1,0 +1,26 @@
+---
+layout: default
+---
+{% assign folder = "_recipes/" | append: page.slug | append: "/" %}
+{% assign all_recipes = site.recipes | sort: "title" %}
+
+<section class="section-hero">
+  <a class="crumb" href="{{ '/' | relative_url }}">← All sections</a>
+  <h1><span class="emoji">{{ page.emoji }}</span> {{ page.title }}</h1>
+  {% if page.description %}<p class="lede">{{ page.description }}</p>{% endif %}
+  {{ content }}
+</section>
+
+<div class="card-grid">
+  {% assign count = 0 %}
+  {% for recipe in all_recipes %}
+    {% if recipe.relative_path contains folder %}
+      {% assign count = count | plus: 1 %}
+      {% include recipe-card.html recipe=recipe emoji=page.emoji %}
+    {% endif %}
+  {% endfor %}
+</div>
+
+{% if count == 0 %}
+  <p class="empty">No recipes here yet.</p>
+{% endif %}

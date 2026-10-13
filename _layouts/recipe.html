@@ -1,0 +1,41 @@
+---
+layout: default
+---
+{% assign parts = page.relative_path | split: "/" %}
+{% assign section_slug = parts[1] %}
+{% assign section = site.sections | where: "slug", section_slug | first %}
+
+<article class="recipe">
+  <a class="crumb" href="{{ section.url | relative_url }}">← {{ section.emoji }} {{ section.title }}</a>
+
+  <header class="recipe-head">
+    <h1>{{ page.title }}</h1>
+  {% if page.coming_soon %}
+  </header>
+  {% comment %} While a recipe is marked coming_soon, only the title is shown. {% endcomment %}
+  <p class="coming-soon">🚧 This recipe is still being written. Check back soon!</p>
+  {% else %}
+    {% if page.description %}<p class="lede">{{ page.description }}</p>{% endif %}
+
+    <ul class="facts">
+      {% if page.servings %}<li><span>Serves</span>{{ page.servings }}</li>{% endif %}
+      {% if page.prep_time %}<li><span>Prep</span>{{ page.prep_time }}</li>{% endif %}
+      {% if page.cook_time %}<li><span>Cook</span>{{ page.cook_time }}</li>{% endif %}
+      {% if page.cost %}<li><span>Cost</span>{{ page.cost }}</li>{% endif %}
+    </ul>
+
+    {% if page.tags %}
+      <ul class="tags">{% for tag in page.tags %}<li>{{ tag }}</li>{% endfor %}</ul>
+    {% endif %}
+  </header>
+
+  {% if page.image %}
+    {% comment %} Photos live next to the recipe file, so a plain relative path works. {% endcomment %}
+    <img class="hero-photo" src="{{ page.image }}" alt="{{ page.title | escape }}">
+  {% endif %}
+
+  <div class="recipe-body">
+    {{ content }}
+  </div>
+  {% endif %}
+</article>

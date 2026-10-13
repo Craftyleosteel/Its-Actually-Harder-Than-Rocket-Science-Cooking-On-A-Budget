@@ -1,0 +1,41 @@
+{
+  // Run these from the menu: Terminal > Run Task...
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Cookbook: Check all recipes",
+      "type": "shell",
+      "command": "python scripts/check_recipes.py",
+      "group": { "kind": "test", "isDefault": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "Cookbook: Check the recipe I have open",
+      "type": "shell",
+      "command": "python scripts/check_recipes.py \"${file}\"",
+      "problemMatcher": []
+    },
+    {
+      "label": "Cookbook: New recipe",
+      "type": "shell",
+      "command": "python scripts/new_recipe.py \"${input:section}\" \"${input:recipeTitle}\"",
+      "problemMatcher": []
+    },
+    {
+      "label": "Cookbook: New section",
+      "type": "shell",
+      "command": "python scripts/new_section.py \"${input:sectionTitle}\"",
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "section",
+      "type": "pickString",
+      "description": "Which section does it go in?",
+      "options": ["breakfast", "packable-lunches", "apps", "snacks", "sides", "mains", "desserts", "baked-goods"]
+    },
+    { "id": "recipeTitle", "type": "promptString", "description": "Recipe title (e.g. Chicken Adobo)" },
+    { "id": "sectionTitle", "type": "promptString", "description": "Section name (e.g. Drinks)" }
+  ]
+}
